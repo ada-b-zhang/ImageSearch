@@ -1,30 +1,35 @@
-# ImageSearch: Image Retrieval with CIFAR-10
+<h1 align="center">🔍 ImageSearch: CIFAR-10 Image Retrieval 🔍</h1>
 
-[![Streamlit](https://img.shields.io/badge/Streamlit-App-red)](https://streamlit.io/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-Framework-orange)](https://pytorch.org/)
-[![FAISS](https://img.shields.io/badge/FAISS-Search-blue)](https://github.com/facebookresearch/faiss)
+<p align="center">
+  <a href="https://streamlit.io/">
+    <img src="https://img.shields.io/badge/Streamlit-App-red" alt="Streamlit">
+  </a>
+  <a href="https://pytorch.org/">
+    <img src="https://img.shields.io/badge/PyTorch-Framework-orange" alt="PyTorch">
+  </a>
+  <a href="https://github.com/facebookresearch/faiss">
+    <img src="https://img.shields.io/badge/FAISS-Search-blue" alt="FAISS">
+  </a>
+</p>
+<div align="center">
 
+Allow users to query using an image and return the **most similar** images.
+
+Demonstrate **unsupervised** image retrieval techniques.
+
+Serve as a foundation for scalable, real-world **image search systems**.
+
+</div>
 
 ---
-This project implements an **image similarity search engine** using the **CIFAR-10 dataset**. Given a query image, the system retrieves the top-k most visually similar images from a large, **unannotated** database.
 
-## Project Overview
+<h1 align="center">How it Works</h1>
 
-The goal of this project is to build a system that can:
-- **Index and search images based on visual similarity** without relying on labels.
-- Allow users to query using an image and return the most similar images.
-- Demonstrate **unsupervised image retrieval** techniques.
-- Serve as a foundation for scalable, real-world image search systems.
-
----
-
-## How it Works
-
-### 1. **Embedding Generation**
+### **Embedding Generation**
 - Each image in the CIFAR-10 dataset is passed through a **pre-trained ResNet18 model**.
 - **ResNet18** is a **Convolutional Neural Network (CNN)** architecture with 18 layers:
-  - [HERE](https://huggingface.co/microsoft/resnet-18) is the model card
-  - Uses **skip connections** to tackle the **vanishing gradient problem**
+  - [HERE](https://huggingface.co/microsoft/resnet-18) is the model card.
+  - Uses **skip connections** to tackle the **vanishing gradient problem**.
 - These embeddings capture key visual features like shape, color, and texture.
 - We remove the final classification layer (to make this **unnanotated**).
 - The embeddings are **L2-normalized** to ensure that similarity comparisons use cosine similarity effectively.
@@ -34,7 +39,7 @@ The goal of this project is to build a system that can:
     - Distances could be influenced by vector length.
     - Similar images could appear far apart in embedding space due to magnitude differences.
 
-### 2. **FAISS**
+### **FAISS**
 - FAISS is "a library for efficient similarity search and clustering of dense vectors." [Source](https://github.com/facebookresearch/faiss)
 - All embeddings are stored in a **FAISS index** (`IndexFlatL2`):
   1. It calculates the L2 distance between your query embedding and every stored embedding.
@@ -48,15 +53,44 @@ The goal of this project is to build a system that can:
   - It computes distances between the query embedding and all stored embeddings.
   - It returns the indices of the k most similar embeddings.
 
-### 3. **Evaluation**
-Although the system is **unsupervised**, evaluation is done using CIFAR-10 class labels:
-- **Precision@k:** Measures how many of the top-k retrieved images belong to the same class as the query image.
-  - **Formula:** Precision@k = (Number of correctly retrieved images) ÷ k
-    - k = number of retrieved images
-    - Correctly retrieved images = retrieved images whose label matches the query image’s label
-  - Example:
-    - If you query with an image of a **cat** and retrieve 5 images with labels: `[cat, cat, dog, cat, airplane]`
-    - Precision@5 = 3 / 5 = 0.6
-- **Qualitative Evaluation:** The Streamlit app allows you to visually inspect retrieved results to assess visual similarity.
+### **Evaluation**
+Although the system is **unsupervised**, evaluation is done using CIFAR-10 class labels. Currently, there are two main methods of evaluation: 
+
+1. **Precision@k:** Measures how many of the top-k retrieved images belong to the same class as the query image.
+    - Formula: `Precision@k = (Number of correctly retrieved images) ÷ k`
+      - `k` = number of retrieved images
+      - Correctly retrieved images = retrieved images whose label matches the query image’s label
+    - Example:
+      - If you query with an image of a **cat** and retrieve 5 images with labels: `[cat, cat, dog, cat, airplane]`
+      - `Precision@5 = 3 / 5 = 0.6`
+
+2. **Qualitative Evaluation:** The Streamlit app allows you to visually inspect retrieved results to assess visual similarity.
 
 ---
+
+<h1 align="center">File Structure</h1>
+
+```
+.
+├── README.md
+├── app
+│   └── app.py
+├── cifar
+│   ├── cifar-10-batches-py
+│   │   ├── batches.meta
+│   │   ├── data_batch_1
+│   │   ├── data_batch_2
+│   │   ├── data_batch_3
+│   │   ├── data_batch_4
+│   │   ├── data_batch_5
+│   │   ├── readme.html
+│   │   └── test_batch
+│   └── cifar-10-python.tar.gz
+├── notebooks
+│   └── image_search.ipynb
+├── outputs
+│   ├── embeddings.npy
+│   ├── faiss_index.index
+│   └── labels.npy
+└── requirements.txt
+```
