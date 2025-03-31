@@ -1,4 +1,5 @@
-<h1 align="center">🔍 ImageSearch: CIFAR-10 Image Retrieval 🔍</h1>
+<h1 align="center">🔍 Pic2Vec 🔍</h1>
+<h2 align="center">An Unsupervised Image Search Engine using Deep Visual Embeddings</h2>
 
 <p align="center">
   <a href="https://streamlit.io/">
@@ -11,6 +12,7 @@
     <img src="https://img.shields.io/badge/FAISS-Search-blue" alt="FAISS">
   </a>
 </p>
+
 <div align="center">
 
 Allow users to query using an image and return the **most similar** images.
@@ -24,6 +26,9 @@ Serve as a foundation for scalable, real-world **image search systems**.
 ---
 
 <h1 align="center">How it Works</h1>
+
+### **Dataset**
+This system is built using the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) dataset. 
 
 ### **Embedding Generation**
 - Each image in the CIFAR-10 dataset is passed through a **pre-trained ResNet18 model**.
