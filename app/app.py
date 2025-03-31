@@ -46,7 +46,7 @@ def search(query_idx, k=5):
 # STREAMLIT UI
 # ----------------------------------------------------------------------------------------------------
 
-st.title("🔍 ImageSearch - CIFAR-10 Edition")
+st.title("🔍 ImageSearch: CIFAR-10 Edition")
 st.write("Search for similar images in CIFAR-10 using image embeddings and FAISS.")
 
 query_option = st.radio("Select query image:", ["Random", "By Index"])
@@ -64,7 +64,7 @@ if st.button("🔍 Search"):
 
     distances, indices = search(query_idx, k)
     
-    st.subheader(f"Top-{k} Similar Images")
+    st.subheader(f"Top {k} Similar Images")
     cols = st.columns(k)
     for i in range(k):
         img_idx = indices[i]
