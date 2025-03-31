@@ -1,0 +1,17 @@
+# Ignore large binary files and outputs
+outputs/
+cifar/
+*.npy
+*.index
+*.tar.gz
+
+# Python
+__pycache__/
+*.pyc
+*.pkl
+
+# MacOS
+.DS_Store
+
+# Environment
+.env
