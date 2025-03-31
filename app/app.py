@@ -46,8 +46,8 @@ def search(query_idx, k=5):
 # STREAMLIT UI
 # ----------------------------------------------------------------------------------------------------
 
-st.title("🔍 ImageSearch: CIFAR-10 Edition")
-st.write("Search for similar images in CIFAR-10 using image embeddings and FAISS.")
+st.title("🔍 Pic2Vec")
+st.write("An Unsupervised Image Search Engine using Deep Visual Embeddings.")
 
 query_option = st.radio("Select query image:", ["Random", "By Index"])
 k = st.slider("Number of similar images to retrieve (k):", min_value=1, max_value=10, value=5)
