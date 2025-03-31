@@ -22,7 +22,9 @@ The goal of this project is to build a system that can:
 
 ### 1. **Embedding Generation**
 - Each image in the CIFAR-10 dataset is passed through a **pre-trained ResNet18 model**.
-- **ResNet18** is a **Convolutional Neural Network (CNN)** architecture with 18 layers: [HERE](https://huggingface.co/microsoft/resnet-18) is the model card
+- **ResNet18** is a **Convolutional Neural Network (CNN)** architecture with 18 layers:
+  - [HERE](https://huggingface.co/microsoft/resnet-18) is the model card
+  - Uses **skip connections** to tackle the **vanishing gradient problem**
 - These embeddings capture key visual features like shape, color, and texture.
 - We remove the final classification layer (to make this **unnanotated**).
 - The embeddings are **L2-normalized** to ensure that similarity comparisons use cosine similarity effectively.
