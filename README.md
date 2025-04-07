@@ -59,17 +59,18 @@ This system is built using the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar
   - It returns the indices of the k most similar embeddings.
 
 ### **Evaluation**
-Although the system is **unsupervised**, evaluation is done using CIFAR-10 class labels. Currently, there are two main methods of evaluation: 
-
 1. **Precision@k:** Measures how many of the top-k retrieved images belong to the same class as the query image.
+    - This the **supervised** evaluation.
     - Formula: `Precision@k = (Number of correctly retrieved images) ÷ k`
       - `k` = number of retrieved images
       - Correctly retrieved images = retrieved images whose label matches the query image’s label
     - Example:
       - If you query with an image of a **cat** and retrieve 5 images with labels: `[cat, cat, dog, cat, airplane]`
       - `Precision@5 = 3 / 5 = 0.6`
-
-2. **Qualitative Evaluation:** The Streamlit app allows you to visually inspect retrieved results to assess visual similarity.
+2. **k-means clustering with t-SNE**: Group the embeddings into 10 classes using k-means clustering, then use t-SNE to visualize.
+    - Use k-means to find `n_clusters=10` groups in the 512-dimensional image embeddings.
+    - Use t-SNE to compress 512-dimensional embeddings into 2 dimensions so we can plot them.
+3. **Qualitative Evaluation:** The Streamlit app allows you to visually inspect retrieved results to assess visual similarity.
 
 ---
 
